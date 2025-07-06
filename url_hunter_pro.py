@@ -12,7 +12,7 @@ from typing import List, Optional, Generator, Tuple
 from pathlib import Path
 import itertools
 from dataclasses import dataclass
-from config import *
+from config_pro import *
 
 # ================ CONSTANTES DE CORES ================
 class Colors:
