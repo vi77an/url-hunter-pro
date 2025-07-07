@@ -422,17 +422,18 @@ def save_results(results: List[str], search_term: str) -> str:
     # Criar nome de arquivo seguro
     safe_term = "".join(c for c in search_term if c.isalnum() or c in ('-', '_', '.'))
     timestamp = time.strftime("%Y%m%d_%H%M%S")
-    output_file = os.path.join(resultados_dir, f"resultado_{safe_term}_{timestamp}.txt")
+    output_file = os.path.join(resultados_dir, f"{safe_term}_{timestamp}.txt")
     
     try:
         with open(output_file, 'w', encoding='utf-8') as file:
             # Adicionar cabeçalho compacto com informações
-            file.write(f"# URL Hunter - Resultados da Busca\n")
+            file.write(f"# URL Hunter by VL ~ villanelle | t.me/vi77an\n")
             file.write(f"# Termo buscado: {search_term} | Data/Hora: {time.strftime('%Y-%m-%d %H:%M:%S')} | Total: {len(results)}\n")
             file.write(f"# {'='*60}\n")
             
-            # Escrever resultados sem quebras de linha extras
-            file.write('\n'.join(results))
+            # Remover quebras de linha dos dados originais
+            cleaned_results = [result.strip() for result in results if result.strip()]
+            file.write('\n'.join(cleaned_results))
         
         print(f"{Colors.PURPLE}[💚] CONFIRA >> {Colors.GREEN}{output_file}{Colors.RESET}")
         print(f"{Colors.GREEN}[📊] {len(results)} resultados salvos{Colors.RESET}")
